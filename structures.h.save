@@ -1,0 +1,6 @@
+
+struct Stack()
+{
+    int data[Cpacity];
+    int size;
+}

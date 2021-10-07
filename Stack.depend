@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1633638458 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
+	<stdio.h>
+	"structures.h"
+
+1633624127 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdtor.cpp
+	<stdio.h>
+	"structures.h"
+
+1633638426 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
+
+1633643110 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"structures.h"
+
+1633637352 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpop.cpp
+	<stdio.h>
+	"structures.h"
+
+1633637689 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpush.cpp
+	<stdio.h>
+	<assert.h>
+	"structures.h"
+

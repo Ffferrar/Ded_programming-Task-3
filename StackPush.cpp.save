@@ -1,0 +1,9 @@
+#include <stdio.h>
+#include "structures.h"
+
+void StackPush(Stack *stack, int value)
+{
+    assert(stack);
+    stack->data[stack -> size] = value;
+    stack->size++;
+}
