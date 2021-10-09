@@ -36,6 +36,7 @@
 		<Unit filename="StackDtor.cpp" />
 		<Unit filename="StackPop.cpp" />
 		<Unit filename="StackPush.cpp" />
+		<Unit filename="V1_CPU.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="structures.h" />
 		<Extensions>

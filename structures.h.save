@@ -1,6 +1,21 @@
 
-struct Stack()
+struct Stack
 {
-    int data[Cpacity];
-    int size;
-}
+    int capacity;
+    int *data;
+    int ssize;
+};
+
+void StackCtr (Stack *sstack, int capacity);
+
+void StackPush(Stack *sstack, int value);
+
+int StackPop(Stack *sstack);
+
+void StackDctor();
+
+int inf_proc ();
+
+void CPU ();
+
+void User_Work();
