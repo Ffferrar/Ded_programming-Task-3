@@ -20,6 +20,7 @@ int main()
     scanf("%d", &Start_Var);
     char trash;
     scanf("%c", &trash);
+    
     switch (Start_Var)
     {
         case 0: break;
@@ -27,7 +28,7 @@ int main()
         case 1: Stack S;
                 StackCtr(&S, 10); //вызываю функцию для реализации всякого
 
-                User_Work(&S)
+                User_Work(&S);
                 break;
 
         default: printf("main(): ERROR: Start_Var = %d/n", Start_Var);

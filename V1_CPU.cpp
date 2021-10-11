@@ -81,14 +81,15 @@ int inf_proc (Stack *S, char user_ch)    //считываем сюда команду, закидываем в 
         user_data[i] = user_ch;
     }
 
-    printf ("Enter the number: ");
     int user_number = 0;
-    scanf("%d", &user_number);
-
     //теперь вызовем сами команды
 
     if ( command_compare (user_data, i, PUSH_command, 4) )
     {
+        printf ("Enter the number: ");
+
+        scanf("%d", &user_number);
+
         CPU(0, user_number, S);
     }
 

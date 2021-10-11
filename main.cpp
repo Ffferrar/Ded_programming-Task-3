@@ -20,6 +20,7 @@ int main()
     scanf("%d", &Start_Var);
     char trash;
     scanf("%c", &trash);
+
     switch (Start_Var)
     {
         case 0: break;

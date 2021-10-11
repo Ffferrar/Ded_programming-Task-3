@@ -41,7 +41,7 @@ int command_compare(char *data1, int length1, char *data2, int length2)
     }
 }
 
-int inf_proc (Stack *S)    //считываем сюда команду, закидываем в массив и проверяем с командами
+int inf_proc (Stack *S, char user_ch)    //считываем сюда команду, закидываем в массив и проверяем с командами
 {
     char PUSH_command[4] = {'P','u','s','h'};
     int len_push = 4;
@@ -59,11 +59,13 @@ int inf_proc (Stack *S)    //считываем сюда команду, закидываем в массив и прове
     int len_sub = 3;
 
     int i = 0;
-    char user_ch;
 
-    printf ("Enter the command: ");
-    scanf("%c", &user_ch);
-    if (user_ch == 
+
+    /*if (user_ch == '!')
+    {
+        return 0;
+    } */
+
     //char *user_data = (char*) calloc (30, sizeof(char));  //TODO^ проверять размер массива!!!
     char user_data[30]={};
     user_data[0] = user_ch;
@@ -79,14 +81,15 @@ int inf_proc (Stack *S)    //считываем сюда команду, закидываем в массив и прове
         user_data[i] = user_ch;
     }
 
-    printf ("Enter the number: ");
     int user_number = 0;
-    scanf("%d", &user_number);
-
     //теперь вызовем сами команды
 
     if ( command_compare (user_data, i, PUSH_command, 4) )
     {
+        printf ("Enter the number: ");
+        
+        scanf("%d", &user_number);
+        
         CPU(0, user_number, S);
     }
 
@@ -112,7 +115,8 @@ int inf_proc (Stack *S)    //считываем сюда команду, закидываем в массив и прове
 
     else
     {
-        printf("Your command is NOT DEFINED. Please try again");
+        printf("\nYour command is NOT DEFINED. Please press ENTER to continue\n");
+        scanf("%c", &user_ch);//считали \n
     }
 
 }
@@ -125,7 +129,7 @@ void CPU (int COMMAND_NUM, int user_number, Stack *S) // вызываем сами команды  
         case 0: StackPush(S, user_number);
                 break;
 
-        case 1: StackPop(S);
+        case 1: printf("%d\n", StackPop(S));
                 break;
 
         case 2: StackPush(S, StackPop(S) + StackPop(S));
@@ -139,8 +143,18 @@ void CPU (int COMMAND_NUM, int user_number, Stack *S) // вызываем сами команды  
     }
 }
 
-void User_Work() //здесь по циклу вызываем CPU и inf_proc
+void User_Work(Stack *S) //здесь по циклу вызываем CPU и inf_proc
 {
-    printf("\nPlease, enter your commands\nIf you want to finish programm, enter !");
-    
+    printf("\nPlease, enter your commands\nIf you want to finish programm, enter !\n");
+    printf ("Enter the command: ");
+    char user_ch;
+    scanf("%c", &user_ch);
+    while (user_ch != '!')
+    {
+       inf_proc(S, user_ch);
+       scanf("%c", &user_ch);//считали \n
+
+       printf ("Enter the command: ");
+       scanf("%c", &user_ch);
+    }
 }
