@@ -20,13 +20,15 @@ int main()
     scanf("%d", &Start_Var);
     char trash;
     scanf("%c", &trash);
-    
+
+    Stack S;
     switch (Start_Var)
     {
-        case 0: break;
+        case 0: StackCtr(&S);
+                //printf("%c", StackPop(&S));
+                break;
 
-        case 1: Stack S;
-                StackCtr(&S, 10); //вызываю функцию для реализации всякого
+        case 1: StackCtr(&S); //вызываю функцию для реализации всякого
 
                 User_Work(&S);
                 break;

@@ -34,6 +34,7 @@
 		</Compiler>
 		<Unit filename="StackCtr.cpp" />
 		<Unit filename="StackDtor.cpp" />
+		<Unit filename="StackDump.cpp" />
 		<Unit filename="StackPop.cpp" />
 		<Unit filename="StackPush.cpp" />
 		<Unit filename="V1_CPU.cpp" />

@@ -4,9 +4,12 @@
 #include <string.h >
 #include "structures.h"
 
-int StackPop(Stack *sstack)
+int StackOK (Stack *sstack)
 {
-    assert(sstack);
-    sstack->ssize--;
-    return sstack->data[sstack->ssize];
+    if (sstack->ssize < 0)
+    {
+        return 1949;
+    }
+
+    
 }

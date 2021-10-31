@@ -1,33 +1,46 @@
 # depslib dependency file v1.0
-1633736872 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
+1635668756 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
 	<stdio.h>
 	"structures.h"
 
-1633624127 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdtor.cpp
+1635619076 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdtor.cpp
 	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h >
 	"structures.h"
 
-1633736865 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
+1635668071 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
 
-1633643110 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
+1635668082 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"structures.h"
 
-1633637352 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpop.cpp
+1635662945 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpop.cpp
 	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h >
 	"structures.h"
 
-1633709123 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpush.cpp
+1635668071 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpush.cpp
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
 	"structures.h"
 
-1633737487 source:c:\users\trying python\desktop\ded proffesional programming\stack\v1_cpu.cpp
+1633967119 source:c:\users\trying python\desktop\ded proffesional programming\stack\v1_cpu.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"structures.h"
+
+1635663639 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdump.cpp
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h >
 	"structures.h"
 

@@ -21,12 +21,18 @@ int main()
     char trash;
     scanf("%c", &trash);
 
+    Stack S;
     switch (Start_Var)
     {
-        case 0: break;
+        case 0: StackCtr(&S);
+                StackPush(&S, 10);
+                StackPush(&S, 10);
+                printf("%d %d\n", &S.data[0], &S.data[1] );
 
-        case 1: Stack S;
-                StackCtr(&S, 10); //вызываю функцию для реализации всякого
+                printf("%d %d %d %d %d", &S.ssize, &S.capacity, &S.canary1, &S.canary2, &S.data);
+                break;
+
+        case 1: StackCtr(&S); //вызываю функцию для реализации всякого
 
                 User_Work(&S);
                 break;
