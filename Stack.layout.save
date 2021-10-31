@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="StackCtr.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="structures.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="753" topLine="11" />
+			<Cursor1 position="139" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="StackDump.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="StackDtor.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="250" topLine="0" />
+			<Cursor1 position="187" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="StackPop.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="109" topLine="0" />
+			<Cursor1 position="225" topLine="0" />
 		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+		</Folding>
+	</File>
+	<File name="StackDump.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="140" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="11" />
+		</Folding>
 	</File>
 	<File name="V1_CPU.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1794" topLine="113" />
+			<Cursor1 position="1794" topLine="77" />
 		</Cursor>
 		<Folding>
 			<Collapse line="63" />
@@ -27,24 +39,28 @@
 			<Collapse line="96" />
 		</Folding>
 	</File>
-	<File name="StackDtor.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="187" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="StackPush.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="523" topLine="0" />
+			<Cursor1 position="486" topLine="0" />
 		</Cursor>
+		<Folding>
+			<Collapse line="6" />
+			<Collapse line="21" />
+			<Collapse line="24" />
+		</Folding>
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="565" topLine="17" />
+			<Cursor1 position="577" topLine="12" />
 		</Cursor>
 	</File>
-	<File name="structures.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="StackCtr.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="668" topLine="0" />
+			<Cursor1 position="602" topLine="0" />
 		</Cursor>
+		<Folding>
+			<Collapse line="6" />
+			<Collapse line="8" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

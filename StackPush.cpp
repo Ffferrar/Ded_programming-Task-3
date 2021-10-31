@@ -11,10 +11,9 @@ void StackResize(Stack *sstack)
 
     FullofPoison (sstack, safe_cap, sstack->capacity - 1);
 
-    sstack->canary1 = (long long int*) (sstack->data);
-    sstack->canary2 = (long long int*) (sstack->data + sizeof(long long int) / sizeof(int) + sstack->capacity);
+    sstack->canary2 = (long long int*) (sstack->data - sizeof(long long int)/sizeof(int) );
 
-    *sstack->canary1 = 0xDED27BED;
+    sstack->canary1 = 0xDED27BED;
     *sstack->canary2 = 0xBED27DED;
 }
 

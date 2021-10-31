@@ -6,10 +6,28 @@
 
 int StackOK (Stack *sstack)
 {
+    if (sstack == 0)
+    {
+        throw ("ERROR: Stack pointer is NULL");
+    }
+    
     if (sstack->ssize < 0)
     {
-        return 1949;
+        throw ("ERROR: Size of stack is negative");
     }
-
     
+    if (sstack->capacity <0)
+    {
+        throw ("ERROR: Capacity of stack is negative");
+    }
+    
+    if (sstack->capacity < sstack->ssize)
+    {
+        throw ("ERROR: Size < Capacity);
+    }
+    
+    if (sstack->data == 0)
+    {
+        thro
+    }
 }

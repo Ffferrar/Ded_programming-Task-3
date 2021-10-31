@@ -26,10 +26,9 @@ int main()
     {
         case 0: StackCtr(&S);
                 StackPush(&S, 10);
-                StackPush(&S, 10);
-                printf("%d %d\n", &S.data[0], &S.data[1] );
 
-                printf("%d %d %d %d %d", &S.ssize, &S.capacity, &S.canary1, &S.canary2, &S.data);
+                printf("%lld %d %d %d\n", S.canary1, &S.canary1, &S.canary2, S.canary2);
+                printf("%d %d %d %d %d\n", &S.capacity, &S.ssize, &S.data, S.data, StackPop(&S));
                 break;
 
         case 1: StackCtr(&S); //вызываю функцию для реализации всякого
@@ -37,7 +36,7 @@ int main()
                 User_Work(&S);
                 break;
 
-        default: printf("main(): ERROR: Start_Var = %d/n", Start_Var);
+        default: printf("main(): ERROR: Start_Var = %d\n", Start_Var);
                 return 1;
     }
     return 0;

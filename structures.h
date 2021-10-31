@@ -3,11 +3,11 @@
 #define POISON 1984
 struct Stack        //Стэк собственной персоной
 {
+    long long int canary1;
+    long long int* canary2 = nullptr;
     int capacity;
-    int *data;
     int ssize;
-    long long int *canary1;
-    long long int *canary2;
+    int *data = nullptr;
 };
 
 //основные функции для стэка
