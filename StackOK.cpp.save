@@ -8,26 +8,43 @@ int StackOK (Stack *sstack)
 {
     if (sstack == 0)
     {
-        throw ("ERROR: Stack pointer is NULL");
+        return NULL_STACK_POINTER;
     }
-    
+
     if (sstack->ssize < 0)
     {
-        throw ("ERROR: Size of stack is negative");
+        return STACK_UNDERFLOW;
     }
-    
+
     if (sstack->capacity <0)
     {
-        throw ("ERROR: Capacity of stack is negative");
+        return NEGATIVE_CAPACITY;
     }
-    
+
     if (sstack->capacity < sstack->ssize)
     {
-        throw ("ERROR: Size < Capacity);
+        return STACK_OVERFLOW;
+        //throw ("ERROR: Size > Capacity);
     }
-    
+
     if (sstack->data == 0)
     {
-        thro
+        return NULL_DATA_POINTER;
     }
+
+    if (sstack->canary2 == 0)
+    {
+        return NULL_CANARI_POINTER;
+    }
+
+    if (sstack->canary1 != 0xDED27BED)
+    {
+        return CANARY1_DAMAGE;
+    }
+
+    if (*sstack->canary2 != 0xBED27DED)
+    {
+        return CANARY2_DAMAGE;
+    }
+    return 0;
 }

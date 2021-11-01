@@ -8,5 +8,13 @@ int StackPop(Stack *sstack)
 {
     assert(sstack);
     sstack->ssize--;
-    return sstack->data[sstack->ssize];
+    if(StackOK(sstack) != 0)
+    {
+        StackDump(sstack);
+        exit(0);
+    }
+    int a = sstack->data[sstack->ssize];
+    FullofPoison (sstack, sstack->ssize, sstack->ssize);
+
+    return a;
 }

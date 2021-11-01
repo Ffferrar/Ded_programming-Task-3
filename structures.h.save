@@ -3,11 +3,11 @@
 #define POISON 1984
 struct Stack        //Стэк собственной персоной
 {
-    long long int* canary1;
-    long long int* canary2;
+    long long int canary1;
+    long long int* canary2 = nullptr;
     int capacity;
     int ssize;
-    int *data;
+    int *data = nullptr;
 };
 
 //основные функции для стэка
@@ -21,6 +21,18 @@ int StackPop(Stack *sstack);
 void StackDctor(Stack* sstack);
 
 //защита стэка
+
+enum ERRORS_NAMES
+{
+    NULL_STACK_POINTER,
+    STACK_UNDERFLOW,
+    NEGATIVE_CAPACITY,
+    STACK_OVERFLOW,
+    NULL_DATA_POINTER,
+    NULL_CANARI_POINTER,
+    CANARY1_DAMAGE,
+    CANARY2_DAMAGE
+};
 
 int StackOK (Stack *sstack);
 void StackDump (Stack *sstack, int mistake);

@@ -4,12 +4,52 @@
 #include <string.h >
 #include "structures.h"
 
-void StackDump (Stack *sstack, int mistake)
+void ErrorPrint(int ERROR)
 {
-    mistake = StackOK(sstack);
-
-    switch (mistake)
+    switch (ERROR)
     {
+        case NULL_STACK_POINTER: printf("\nERROR: Pointer of stack structure is NULL\n");
+                                 break;
+
+        case STACK_UNDERFLOW: printf("\nERROR: Size of stack is negative\n");
+                              break;
+
+        case NEGATIVE_CAPACITY: printf("\nERROR: Capacity of stack is negative\n");
+                                break;
+
+        case STACK_OVERFLOW: printf("\nERROR: Size of stack > Capacity of stack\n");
+                             break;
+
+        case NULL_DATA_POINTER: printf("\nERROR: Pointer of data is NULL\n");
+                                break;
+
+        case NULL_CANARI_POINTER: printf("\nERROR: Pointer of canary2 is NULL\n");
+                                  break;
+
+        case CANARY1_DAMAGE: printf("\nERROR: Main stack information is damaged. Canary ALLERT\n");
+                             break;
+
+        case CANARY2_DAMAGE: printf("\nERROR: Data of stack is damaged. Canary ALLERT\n");
+                             break;
     }
+
+}
+
+void StackPrint(Stack *sstack)
+{
+    Stack sstack_copy;
+    StackCtr(&sstack_copy);
+    sstack_copy = *sstack;
+    printf("Stack data is printed...\n");
+    for (int i = 0; i < sstack_copy.ssize; i++)
+    {
+        printf("data[%d]: &d\n", i, StackPop(&sstack_copy));
+    }
+}
+
+void StackDump (Stack *sstack)
+{
+    printf("\nDump was called. Please, check your actions:\n");
+    printf("Current stack:\n\tStack size %d\n\tStack capacity %d\n
 }
 

@@ -5,25 +5,35 @@
 
 void FullofPoison (Stack* sstack, int start, int ennd)
 {
-    for (int i = start; i < ennd; i++)
+    for (int i = start; i < ennd+1; i++)         //+1 потому что надо давать заполн€ть все €чейки при start==end
     {
         sstack->data[i] = POISON;
     }
+
 }
 
 void StackCtr (Stack* sstack)
 {
+
     //memset(sstack->data, 0, sizeof(sstack->data)); segfault
     sstack->capacity = MAX_SIZE;
     sstack->data = (int*) calloc (MAX_SIZE + 2 * (sizeof(long long int) / sizeof(int)), sizeof(int));  //почему столько выдел€ем?
-    sstack->ssize = 2;
+    sstack->ssize = 0;
 
-    FullofPoison (sstack, 0, MAX_SIZE - 1);
 
     //ставим канарейки
 
     sstack->canary2 = (long long int*) (sstack->data);
+    sstack->data = sstack->data + (sizeof(long long int) / sizeof(int));
+
+    FullofPoison (sstack, 0, MAX_SIZE);
 
     sstack->canary1 = 0xDED27BED;
     *sstack->canary2 = 0xBED27DED;
+
+    if(StackOK(sstack) != 0)
+    {
+        StackDump(sstack);
+        exit(0);
+    }
 }

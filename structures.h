@@ -3,10 +3,10 @@
 #define POISON 1984
 struct Stack        //Стэк собственной персоной
 {
-    long long int canary1;
+    long long int canary1 = 0;
     long long int* canary2 = nullptr;
-    int capacity;
-    int ssize;
+    int capacity = 0;
+    int ssize = 0;
     int *data = nullptr;
 };
 
@@ -22,8 +22,23 @@ void StackDctor(Stack* sstack);
 
 //защита стэка
 
+enum ERRORS_NAMES
+{
+    NULL_STACK_POINTER = 1,
+    STACK_UNDERFLOW,
+    NEGATIVE_CAPACITY,
+    STACK_OVERFLOW,
+    NULL_DATA_POINTER,
+    NULL_CANARI_POINTER,
+    CANARY1_DAMAGE,
+    CANARY2_DAMAGE
+};
+
 int StackOK (Stack *sstack);
-void StackDump (Stack *sstack, int mistake);
+void StackDump (Stack *sstack);
+void ErrorPrint(int ERROR);
+void StackPrint(Stack *sstack);
+
 void FullofPoison (Stack* sstack, int start, int ennd);
 
 //для V1 of CPU

@@ -5,6 +5,7 @@
 
 void StackResize(Stack *sstack)
 {
+
     int safe_cap = sstack->capacity;
     sstack->capacity += RISE_V_STACK;
     sstack->data = (int*) calloc (sstack->capacity, sizeof(int));
@@ -19,6 +20,12 @@ void StackResize(Stack *sstack)
 
 void StackPush(Stack *sstack, int value)
 {
+    if(StackOK(sstack) != 0)
+    {
+        StackDump(sstack);
+        exit(0);
+    }
+
     assert(sstack);
     if ( sstack->ssize == sstack->capacity - 1 )
     {
