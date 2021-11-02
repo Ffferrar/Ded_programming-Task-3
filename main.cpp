@@ -26,19 +26,7 @@ int main()
     switch (Start_Var)
     {
         case 0: StackCtr(&S);
-                //StackPush(&S, 10);
-                //S.canary1 = 10;
-                //f=S;
-                //StackPush(&S, 10);
-
-                //printf("%d\n", StackPop(&f));
-                //printf("%d\n", StackPop(&S));
-                printf("%d\n", S.data[0]);
-                //printf("%d\n", StackPop(&S));
-                //printf("%d\n", StackPop(&S));
-
-                //printf("%lld %d %d %d\n", S.canary1, &S.canary1, &S.canary2, S.canary2);
-                //printf("%d %d %d %d %d\n", &S.capacity, &S.ssize, &S.data, S.data, StackPop(&S));
+                StackDtor(&S);
                 break;
 
         case 1: StackCtr(&S); //вызываю функцию для реализации всякого

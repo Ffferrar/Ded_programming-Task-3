@@ -1,6 +1,8 @@
 #define MAX_SIZE 10
 #define RISE_V_STACK 10
 #define POISON 1984
+#define HASH_CONST 7
+
 struct Stack        //Стэк собственной персоной
 {
     long long int canary1 = 0;
@@ -8,17 +10,20 @@ struct Stack        //Стэк собственной персоной
     int capacity = 0;
     int ssize = 0;
     int *data = nullptr;
+    long long int hash_ = 0;
 };
 
 //основные функции для стэка
 
-void StackCtr (Stack *sstack);
+void StackCtr (Stack* sstack);
 
 void StackPush(Stack *sstack, int value);
 
 int StackPop(Stack *sstack);
 
-void StackDctor(Stack* sstack);
+void StackDtor(Stack* sstack);
+
+void StackResize(Stack *sstack);
 
 //защита стэка
 
@@ -31,7 +36,8 @@ enum ERRORS_NAMES
     NULL_DATA_POINTER,
     NULL_CANARI_POINTER,
     CANARY1_DAMAGE,
-    CANARY2_DAMAGE
+    CANARY2_DAMAGE,
+    HASH_DAMAGE
 };
 
 int StackOK (Stack *sstack);
@@ -40,6 +46,9 @@ void ErrorPrint(int ERROR);
 void StackPrint(Stack *sstack);
 
 void FullofPoison (Stack* sstack, int start, int ennd);
+
+long long int StackHash (Stack *sstack);
+
 
 //для V1 of CPU
 

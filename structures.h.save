@@ -1,30 +1,35 @@
 #define MAX_SIZE 10
 #define RISE_V_STACK 10
 #define POISON 1984
+#define HASH_CONST 7
+
 struct Stack        //Стэк собственной персоной
 {
-    long long int canary1;
+    long long int canary1 = 0;
     long long int* canary2 = nullptr;
-    int capacity;
-    int ssize;
+    int capacity = 0;
+    int ssize = 0;
     int *data = nullptr;
+    int hash_ = 0;
 };
 
 //основные функции для стэка
 
-void StackCtr (Stack *sstack);
+void StackCtr (Stack* sstack);
 
 void StackPush(Stack *sstack, int value);
 
 int StackPop(Stack *sstack);
 
-void StackDctor(Stack* sstack);
+void StackDtor(Stack* sstack);
+
+void StackResize(Stack *sstack);
 
 //защита стэка
 
 enum ERRORS_NAMES
 {
-    NULL_STACK_POINTER,
+    NULL_STACK_POINTER = 1,
     STACK_UNDERFLOW,
     NEGATIVE_CAPACITY,
     STACK_OVERFLOW,
@@ -35,7 +40,10 @@ enum ERRORS_NAMES
 };
 
 int StackOK (Stack *sstack);
-void StackDump (Stack *sstack, int mistake);
+void StackDump (Stack *sstack);
+void ErrorPrint(int ERROR);
+void StackPrint(Stack *sstack);
+
 void FullofPoison (Stack* sstack, int start, int ennd);
 
 //для V1 of CPU

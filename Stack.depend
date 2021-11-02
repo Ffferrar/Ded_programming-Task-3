@@ -1,21 +1,23 @@
 # depslib dependency file v1.0
-1635794406 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
+1635798415 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
 	<stdio.h>
 	"structures.h"
 
-1635619076 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdtor.cpp
+1635798437 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdtor.cpp
 	<stdio.h>
 	<assert.h>
 	<stdlib.h>
 	<string.h >
 	"structures.h"
 
-1635782425 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
+1635800887 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
 
-1635796166 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
+1635834293 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
 	<stdio.h>
+	<assert.h>
 	<stdlib.h>
-	<string.h>
+	<string.h >
+	<math.h>
 	"structures.h"
 
 1635794501 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpop.cpp
@@ -25,7 +27,7 @@
 	<string.h >
 	"structures.h"
 
-1635792132 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpush.cpp
+1635801556 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackpush.cpp
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -37,17 +39,25 @@
 	<string.h>
 	"structures.h"
 
-1635792181 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdump.cpp
+1635800857 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackdump.cpp
 	<stdio.h>
 	<assert.h>
 	<stdlib.h>
 	<string.h >
 	"structures.h"
 
-1635784849 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackok.cpp
+1635800799 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackok.cpp
 	<stdio.h>
 	<assert.h>
 	<stdlib.h>
 	<string.h >
+	"structures.h"
+
+1635801533 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackhash.cpp
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	<string.h >
+	<math.h>
 	"structures.h"
 

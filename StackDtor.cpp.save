@@ -1,8 +1,0 @@
-#include <stdio.h>
-#include "structures.h"
-
-void StackDctor(Stack* sstack)
-{
-    assert(sstack);
-    memset(sstack -> data, 
-}
