@@ -1,16 +1,16 @@
 #define MAX_SIZE 10
 #define RISE_V_STACK 10
 #define POISON 1984
-#define HASH_CONST 7
+#define HASH_CONST 7           //добавить два typedefа
 
 struct Stack        //Стэк собственной персоной
 {
     long long int canary1 = 0;
     long long int* canary2 = nullptr;
-    int capacity = 0;
-    int ssize = 0;
+    int capacity = 0;      //TODO заменить size capacity на sizet
+    int ssize = 0;         //TODO сделать название size
     int *data = nullptr;
-    long long int hash_ = 0;
+    long long int hash_ = 0; //TODO две канарейки
 };
 
 //основные функции для стэка
@@ -33,7 +33,7 @@ enum ERRORS_NAMES
     STACK_UNDERFLOW,
     NEGATIVE_CAPACITY,
     STACK_OVERFLOW,
-    NULL_DATA_POINTER,
+    NULL_DATA_POINTER,     //вручную пронумеровать
     NULL_CANARI_POINTER,
     CANARY1_DAMAGE,
     CANARY2_DAMAGE,

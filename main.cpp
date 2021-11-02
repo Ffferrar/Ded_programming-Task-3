@@ -18,7 +18,7 @@ int main()
 
     printf("If You want to work with CPU, ENTER 1\nElse ENTER 0: ");
     scanf("%d", &Start_Var);
-    char trash;
+    char trash;          //TODO инициализировать переменные
     scanf("%c", &trash);
 
     Stack S;
@@ -26,7 +26,14 @@ int main()
     switch (Start_Var)
     {
         case 0: StackCtr(&S);
-                StackDtor(&S);
+                StackPush(&S, 10);
+                S.data = NULL;
+                StackDump(&S);
+                //StackDtor(&S);
+                /*StackPush(&S, 10);
+                S.data[0] = 1;
+                StackPop(&S);
+                StackDtor(&S);*/
                 break;
 
         case 1: StackCtr(&S); //вызываю функцию для реализации всякого

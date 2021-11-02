@@ -17,6 +17,9 @@ void FullofPoison (Stack* sstack, int start, int ennd)
 //  онструктор стэка
 void StackCtr (Stack* sstack)
 {
+    //TODO провер€ть на нулевой указатель
+    //TODO добавить желаемый размер
+
 
     //memset(sstack->data, 0, sizeof(sstack->data)); segfault
     sstack->capacity = MAX_SIZE;
@@ -27,19 +30,19 @@ void StackCtr (Stack* sstack)
     //ставим канарейки
 
     sstack->canary2 = (long long int*) (sstack->data);
-    sstack->data = sstack->data + (sizeof(long long int) / sizeof(int));
+    sstack->data += + (sizeof(long long int) / sizeof(int));
 
     FullofPoison (sstack, 0, MAX_SIZE);
 
-    sstack->canary1 = 0xDED27BED;
-    *sstack->canary2 = 0xBED27DED;
+    sstack->canary1 = 0xDED27BED;   //TODO вынести значение канареек в константу
+    *sstack->canary2 = 0xBED27DED;  //TODO ”величить значение канарейки в 2 раза
 
     sstack->hash_ = StackHash(sstack);
 
     if(StackOK(sstack) != 0)
     {
         StackDump(sstack);
-        exit(0);
+        exit(0);                 //TODO сделать без exit
     }
 }
 
@@ -48,13 +51,13 @@ void StackResize(Stack *sstack)
 
     int safe_cap = sstack->capacity;
     sstack->capacity += RISE_V_STACK;
-    sstack->data = (int*) calloc (sstack->capacity, sizeof(int));
+    sstack->data = (int*) calloc (sstack->capacity + 2 * (sizeof(long long int) / sizeof(int)), sizeof(int)); //TODO  –»Ќ∆ √јЋј “»„≈— »’ ћј—Ў“јЅќ¬
 
     FullofPoison (sstack, safe_cap, sstack->capacity - 1);
 
-    sstack->canary2 = (long long int*) (sstack->data - sizeof(long long int)/sizeof(int) );
+    sstack->canary2 = (long long int*) (sstack->data - sizeof(long long int)/sizeof(int) );     //TODO написать дефайн дл€ canary2, —ƒ≈Ћј“№ Ѕ≈« ћ»Ќ”—ј.
 
-    sstack->canary1 = 0xDED27BED;
+    sstack->canary1 = 0xDED27BED;     // TODO бессмысленно, голова остаетс€ живой
     *sstack->canary2 = 0xBED27DED;
 }
 
@@ -78,13 +81,12 @@ void StackPush(Stack *sstack, int value)
 
 int StackPop(Stack *sstack)
 {
-    assert(sstack);
-    sstack->ssize--;
     if(StackOK(sstack) != 0)
     {
         StackDump(sstack);
         exit(0);
     }
+    sstack->ssize--;
     int a = sstack->data[sstack->ssize];
     FullofPoison (sstack, sstack->ssize, sstack->ssize);
 
@@ -98,8 +100,8 @@ void StackDtor(Stack* sstack)
 {
     assert(sstack);
     memset(sstack -> data, 0xF0, sstack -> ssize);
-    free (sstack -> data);
-    free (sstack -> canary2);
+    //free (sstack -> data);    //Ќ≈Ћ№«я ƒ≈Ћј“№!! удалить
+    free (sstack -> canary2); //оставить эту строчку
     sstack -> ssize = -1;
     sstack->canary1 = 0;
 }
@@ -121,19 +123,19 @@ void ErrorPrint(int ERROR)
         case STACK_OVERFLOW: printf("ERROR: Size of stack > Capacity of stack\n\n");
                              break;
 
-        case NULL_DATA_POINTER: printf("ERROR: Pointer of data is NULL\n\n");
+        case NULL_DATA_POINTER: printf("ERROR: Pointer to data is NULL\n\n");
                                 break;
 
-        case NULL_CANARI_POINTER: printf("ERROR: Pointer of canary2 is NULL\n\n");
+        case NULL_CANARI_POINTER: printf("ERROR: Pointer to canary2 is NULL\n\n");
                                   break;
 
         case CANARY1_DAMAGE: printf("ERROR: Main stack information is damaged. Canary ALLERT\n\n");
                              break;
 
-        case CANARY2_DAMAGE: printf("ERROR: Data of stack is damaged. Canary ALLERT\n\n");
+        case CANARY2_DAMAGE: printf("ERROR: Stack data is damaged. Canary ALLERT\n\n");
                              break;
 
-        case HASH_DAMAGE: printf("ERROR: Stack's hash value has been changed\n\n");
+        case HASH_DAMAGE: printf("ERROR: Stack hash value has been changed\n\n");
                           break;
         default: break;
     }
@@ -143,22 +145,22 @@ void ErrorPrint(int ERROR)
 //‘ункци€ печати информаии о стэке
 void StackPrint(Stack *sstack)
 {
-    Stack sstack_copy;
-    StackCtr(&sstack_copy);
+    Stack sstack_copy; //TODO инициализировать
+    StackCtr(&sstack_copy);                  //бессмысленна€ штука, потому что работаем без POP
     sstack_copy = *sstack;
     printf("Stack data is printed...\n");
     for (int i = 0; i < sstack_copy.ssize; i++)
     {
         printf("data[%d]: %d\n", i, sstack_copy.data[i]);
     }
-}
+}                                                                //TODO лог файл и слить в одну функцию
 
 void StackDump (Stack *sstack)
 {
     printf("\nDump was called. Please, check your actions:\n");
     printf("Current stack:\n\tStack size %d\n\tStack capacity %d\n\n", sstack->ssize, sstack->capacity);
 
-    StackPrint(sstack);
+    StackPrint(sstack);             //вызывать только в том случае, если канарейки целы и указатель на data не равен нулю
     ErrorPrint( StackOK(sstack) );
 }
 
@@ -214,7 +216,7 @@ int StackOK (Stack *sstack)
 }
 
 //‘ункци€ подсчета хэша стэка
-long long int StackHash (Stack *sstack)
+long long int StackHash (Stack *sstack)    //TODO сделать хэш дл€ головы, занул€ть хэш перед вызовом в голове
 {
     long long int hassh = 0;
     for (int i = 0; i < sstack->ssize; i++)
