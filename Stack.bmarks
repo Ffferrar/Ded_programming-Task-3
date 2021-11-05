@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="683" topLine="0" />
-		<BrowseMarks positions="62,149,587,618,783,918" />
-		<Book_Marks positions="" />
-	</File>
 	<File name="StackCtr.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="6422" topLine="195" />
-		<BrowseMarks positions="" />
+		<Cursor position="986" topLine="39" />
+		<BrowseMarks positions="968,1119,1297,1620,1857,2519,2684,2686,3602,6344,6482" />
 		<Book_Marks positions="636,6422" />
 	</File>
-	<File name="structures.h" open="1" top="0" tabpos="2">
-		<Cursor position="133" topLine="0" />
-		<BrowseMarks positions="145,610,1043" />
+	<File name="V1_CPU.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="1794" topLine="110" />
+		<BrowseMarks positions="684,1242,1501,1645,1794,1841,2392,2476,2799,3128,3131,3514" />
 		<Book_Marks positions="" />
 	</File>
-	<File name="V1_CPU.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="1794" topLine="77" />
-		<BrowseMarks positions="684,1242,1645,1794,1841,2392,2476,2799,3128,3131,3514,1519" />
+	<File name="structures.h" open="1" top="0" tabpos="2">
+		<Cursor position="382" topLine="0" />
+		<BrowseMarks positions="354,1580,1624" />
+		<Book_Marks positions="1318" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="904" topLine="9" />
+		<BrowseMarks positions="628,659,816,912,963,982,984,1018" />
+		<Book_Marks positions="" />
 	</File>
 </BrowseTracker_layout_file>
