@@ -17,56 +17,70 @@ void FullofPoison (Stack* sstack, int start, int ennd)
 // Конструктор стэка
 void StackCtr (Stack* sstack)
 {
-    //TODO проверять на нулевой указатель
+    if (sstack == nullptr)
+    {
+        StackDump(sstack);
+    }
+    //TODO DONE проверять на нулевой указатель
     //TODO добавить желаемый размер
 
-
-    //memset(sstack->data, 0, sizeof(sstack->data)); segfault
     sstack->capacity = MAX_SIZE;
-    sstack->data = (int*) calloc (MAX_SIZE + 2 * (sizeof(long long int) / sizeof(int)), sizeof(int));  //почему столько выделяем?
+    sstack->data = (size_stack*) calloc (MAX_SIZE + 2*CAN_PLACE, sizeof(size_stack));  //почему столько выделяем?
     sstack->ssize = 0;
-
 
     //ставим канарейки
 
-    sstack->canary2 = (long long int*) (sstack->data);
-    sstack->data += + (sizeof(long long int) / sizeof(int));
+    sstack->canary2 = (size_canary*) (sstack->data);
+    sstack->data += CAN_PLACE;
+    sstack->canary22 = (size_canary*) (sstack->data + sstack->capacity);
 
     FullofPoison (sstack, 0, MAX_SIZE);
 
-    sstack->canary1 = 0xDED27BED;   //TODO вынести значение канареек в константу
-    *sstack->canary2 = 0xBED27DED;  //TODO Увеличить значение канарейки в 2 раза
+    sstack->canary1 = 0xDED27BEDDED27BED;   //TODO NOT DONE вынести значение канареек в константу
+    sstack->cana
+    *sstack->canary2 = 0xBED27DEDBED27DED;  //TODO DONE Увеличить значение канарейки в 2 раза
+    *sstack->canary22 = 0xRAP19BADBAD19RAP;
+    //TODO ЗАПОЛНЯТЬ НОВЫЕ КАНАРЕЙКИ
 
     sstack->hash_ = StackHash(sstack);
+    sstack->hash_head = StackHashHead (sstack);
 
     if(StackOK(sstack) != 0)
     {
-        StackDump(sstack);
-        exit(0);                 //TODO сделать без exit
+        StackDump(sstack); //TODO DONE сделать без exit
     }
 }
 
 void StackResize(Stack *sstack)
 {
-
-    int safe_cap = sstack->capacity;
+    size_stack* resize_data = nullptr;
     sstack->capacity += RISE_V_STACK;
-    sstack->data = (int*) calloc (sstack->capacity + 2 * (sizeof(long long int) / sizeof(int)), sizeof(int)); //TODO КРИНЖ ГАЛАКТИЧЕСКИХ МАСШТАБОВ
 
-    FullofPoison (sstack, safe_cap, sstack->capacity - 1);
 
-    sstack->canary2 = (long long int*) (sstack->data - sizeof(long long int)/sizeof(int) );     //TODO написать дефайн для canary2, СДЕЛАТЬ БЕЗ МИНУСА.
+    resize_data = (size_stack*) calloc (sstack->capacity + 2 * CAN_PLACE, sizeof(size_stack));
+    memmove((size_stack*) resize_data + CAN_PLACE, (size_stack*) sstack->data, sstack->capacity*sizeof(size_stack) );
+    sstack->data = resize_data + CAN_PLACE;
 
-    sstack->canary1 = 0xDED27BED;     // TODO бессмысленно, голова остается живой
-    *sstack->canary2 = 0xBED27DED;
+    /*sstack->data = (int*) calloc (sstack->capacity + 2 * (sizeof(long long int) / sizeof(int)), sizeof(int));*/ //TODO DONE КРИНЖ ГАЛАКТИЧЕСКИХ МАСШТАБОВ
+
+    FullofPoison (sstack, sstack->ssize, sstack->capacity);
+
+    sstack->canary2 = (size_canary*) (resize_data);     //TODO написать дефайн для canary2, DONE СДЕЛАТЬ БЕЗ МИНУСА.
+    sstack->canary22 = (size_canary*) (sstack->data + sstack->capacity);
+    
+    *sstack->canary2 = 0xBED27DEDBED27DED;
+    *sstack->canary22 = 0;
+
+    sstack->hash_head = StackHashHead (sstack);
+
 }
 
-void StackPush(Stack *sstack, int value)
+void StackPush(Stack *sstack, size_stack value)
 {
     if(StackOK(sstack) != 0)
     {
         StackDump(sstack);
-        exit(0);
+
     }
 
     if ( sstack->ssize == sstack->capacity - 1 )
@@ -76,6 +90,7 @@ void StackPush(Stack *sstack, int value)
     sstack->data[sstack -> ssize] = value;
     sstack->ssize++;
     sstack->hash_ = StackHash(sstack);
+    sstack->hash_head = StackHashHead(sstack);
 
 }
 
@@ -84,14 +99,13 @@ int StackPop(Stack *sstack)
     if(StackOK(sstack) != 0)
     {
         StackDump(sstack);
-        exit(0);
     }
     sstack->ssize--;
     int a = sstack->data[sstack->ssize];
     FullofPoison (sstack, sstack->ssize, sstack->ssize);
 
     sstack->hash_ = StackHash(sstack);
-
+    sstack->hash_head = StackHashHead(sstack);
     return a;
 }
 
@@ -114,12 +128,6 @@ void ErrorPrint(int ERROR)
         case NULL_STACK_POINTER: printf("ERROR: Pointer of stack structure is NULL\n\n");
                                  break;
 
-        case STACK_UNDERFLOW: printf("ERROR: Size of stack is negative\n\n");
-                              break;
-
-        case NEGATIVE_CAPACITY: printf("ERROR: Capacity of stack is negative\n\n");
-                                break;
-
         case STACK_OVERFLOW: printf("ERROR: Size of stack > Capacity of stack\n\n");
                              break;
 
@@ -137,6 +145,10 @@ void ErrorPrint(int ERROR)
 
         case HASH_DAMAGE: printf("ERROR: Stack hash value has been changed\n\n");
                           break;
+
+        case HASH_HEAD_DAMAGE: printf("ERROR: Stack head hash value has been changed\n\n");
+                          break;
+
         default: break;
     }
 
@@ -145,22 +157,23 @@ void ErrorPrint(int ERROR)
 //Функция печати информаии о стэке
 void StackPrint(Stack *sstack)
 {
-    Stack sstack_copy; //TODO инициализировать
-    StackCtr(&sstack_copy);                  //бессмысленная штука, потому что работаем без POP
-    sstack_copy = *sstack;
     printf("Stack data is printed...\n");
-    for (int i = 0; i < sstack_copy.ssize; i++)
+    for (int i = 0; i < (int) sstack->ssize; i++)
     {
-        printf("data[%d]: %d\n", i, sstack_copy.data[i]);
+        printf("data[%d]: %d\n", i, sstack->data[i]);
     }
-}                                                                //TODO лог файл и слить в одну функцию
+}                                                                //TODO DONE (ТАК УДОБНЕЕ) лог файл и слить в одну функцию
 
 void StackDump (Stack *sstack)
 {
     printf("\nDump was called. Please, check your actions:\n");
     printf("Current stack:\n\tStack size %d\n\tStack capacity %d\n\n", sstack->ssize, sstack->capacity);
 
-    StackPrint(sstack);             //вызывать только в том случае, если канарейки целы и указатель на data не равен нулю
+    if (sstack->data != nullptr && sstack->canary1 == 0xDED27BEDDED27BED && *sstack->canary2 == 0xBED27DEDBED27DED)
+    {
+        StackPrint(sstack);             //TODO DONE вызывать только в том случае, если канарейки целы и указатель на data не равен нулю
+    }
+
     ErrorPrint( StackOK(sstack) );
 }
 
@@ -170,16 +183,6 @@ int StackOK (Stack *sstack)
     if (sstack == 0)
     {
         return NULL_STACK_POINTER;
-    }
-
-    if (sstack->ssize < 0)
-    {
-        return STACK_UNDERFLOW;
-    }
-
-    if (sstack->capacity <0)
-    {
-        return NEGATIVE_CAPACITY;
     }
 
     if (sstack->capacity < sstack->ssize)
@@ -198,12 +201,12 @@ int StackOK (Stack *sstack)
         return NULL_CANARI_POINTER;
     }
 
-    if (sstack->canary1 != 0xDED27BED)
+    if (sstack->canary1 != 0xDED27BEDDED27BED)
     {
         return CANARY1_DAMAGE;
     }
 
-    if (*sstack->canary2 != 0xBED27DED)
+    if (*sstack->canary2 != 0xBED27DEDBED27DED)
     {
         return CANARY2_DAMAGE;
     }
@@ -212,11 +215,16 @@ int StackOK (Stack *sstack)
     {
         return HASH_DAMAGE;
     }
+
+    if (StackHashHead(sstack) != sstack->hash_head)
+    {
+        return HASH_HEAD_DAMAGE;
+    }
     return 0;
 }
 
 //Функция подсчета хэша стэка
-long long int StackHash (Stack *sstack)    //TODO сделать хэш для головы, занулять хэш перед вызовом в голове
+size_canary StackHash (Stack *sstack)    //TODO DONE сделать хэш для головы, занулять хэш перед вызовом в голове
 {
     long long int hassh = 0;
     for (int i = 0; i < sstack->ssize; i++)
@@ -224,6 +232,14 @@ long long int StackHash (Stack *sstack)    //TODO сделать хэш для головы, зануля
          hassh += sstack->data[i] * (long long int) pow(HASH_CONST, i);
     }
 
+    return hassh;
+}
+
+
+size_canary StackHashHead (Stack *sstack)
+{
+    size_canary hassh = 0;
+    hassh = sstack->ssize + sstack->capacity + sstack->canary1 + sstack->canary12 + (size_canary) sstack->data + sstack->hash_;
     return hassh;
 }
 
