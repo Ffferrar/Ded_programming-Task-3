@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1635869773 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
+1636110568 source:c:\users\trying python\desktop\ded proffesional programming\stack\main.cpp
 	<stdio.h>
 	"structures.h"
 
@@ -10,9 +10,9 @@
 	<string.h >
 	"structures.h"
 
-1635866618 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
+1636112633 c:\users\trying python\desktop\ded proffesional programming\stack\structures.h
 
-1635869773 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
+1636112766 source:c:\users\trying python\desktop\ded proffesional programming\stack\stackctr.cpp
 	<stdio.h>
 	<assert.h>
 	<stdlib.h>

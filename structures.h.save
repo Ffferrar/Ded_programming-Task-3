@@ -1,16 +1,27 @@
+typedef long long int size_canary;
+typedef int size_stack;
+
 #define MAX_SIZE 10
 #define RISE_V_STACK 10
 #define POISON 1984
-#define HASH_CONST 7
+#define HASH_CONST 7           //TODO DONE добавить два typedefа
+
+const int CAN_PLACE  (sizeof (size_canary)/ sizeof (size_stack));
 
 struct Stack        //Стэк собственной персоной
 {
-    long long int canary1 = 0;
-    long long int* canary2 = nullptr;
-    int capacity = 0;      //TODO заменить size capacity на sizet
-    int ssize = 0;         //TODO сделать 
-    int *data = nullptr;
-    long long int hash_ = 0; //TODO две канарейки
+    size_canary canary1 = 0;
+    size_canary* canary2 = nullptr;
+    size_canary* canary22 = nullptr;
+
+    size_t capacity = 0;      //TODO DONE заменить size capacity на sizet
+    size_t ssize = 0;         //TODO сделать название size
+    size_stack *data = nullptr;
+    size_canary hash_ = 0; //TODO DONE две канарейки
+    size_canary hash_head = 0;
+
+    size_canary canary12 = 0;
+
 };
 
 //основные функции для стэка
@@ -30,14 +41,12 @@ void StackResize(Stack *sstack);
 enum ERRORS_NAMES
 {
     NULL_STACK_POINTER = 1,
-    STACK_UNDERFLOW,
-    NEGATIVE_CAPACITY,
-    STACK_OVERFLOW,
-    NULL_DATA_POINTER,     //вручную пронумеровать
-    NULL_CANARI_POINTER,
-    CANARY1_DAMAGE,
-    CANARY2_DAMAGE,
-    HASH_DAMAGE
+    STACK_OVERFLOW = 2,
+    NULL_DATA_POINTER = 3,     //TODO DONE вручную пронумеровать
+    NULL_CANARI_POINTER = 4,
+    CANARY1_DAMAGE = 5,
+    CANARY2_DAMAGE = 6,
+    HASH_DAMAGE = 7
 };
 
 int StackOK (Stack *sstack);

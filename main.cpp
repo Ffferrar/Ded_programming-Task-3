@@ -21,14 +21,21 @@ int main()
     char trash;          //TODO инициализировать переменные
     scanf("%c", &trash);
 
-    Stack S;
-    Stack f;
+    Stack S = {};
+    Stack f = {};
     switch (Start_Var)
     {
         case 0: StackCtr(&S);
-                StackPush(&S, 10);
-                S.data = NULL;
-                StackDump(&S);
+                printf("%d %d\n", S.canary2, S.data);
+
+                for (int i=0;i<12;i++){
+                    StackPush(&S, 10);
+                }
+                printf("%d %d\n", S.canary2, S.data);
+                for (int i=0;i<12;i++){
+                    printf("%d\n", StackPop(&S));
+                }
+
                 //StackDtor(&S);
                 /*StackPush(&S, 10);
                 S.data[0] = 1;
