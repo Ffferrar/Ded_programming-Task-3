@@ -11,8 +11,6 @@ const int CAN_PLACE  (sizeof (size_canary)/ sizeof (size_stack));
 struct Stack        //Стэк собственной персоной
 {
     size_canary canary1 = 0;
-    size_canary* canary2 = nullptr;
-    size_canary* canary22 = nullptr;
 
     size_t capacity = 0;      //TODO DONE заменить size capacity на sizet
     size_t ssize = 0;         //TODO сделать название size

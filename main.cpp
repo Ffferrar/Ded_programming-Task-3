@@ -26,12 +26,12 @@ int main()
     switch (Start_Var)
     {
         case 0: StackCtr(&S);
-                printf("%d %d\n", S.canary2, S.data);
+                //printf("%d %d\n", S.canary2, S.data);
 
                 for (int i=0;i<12;i++){
                     StackPush(&S, 10);
                 }
-                printf("%d %d\n", S.canary2, S.data);
+                //printf("%d %d\n", S.canary2, S.data);
                 for (int i=0;i<12;i++){
                     printf("%d\n", StackPop(&S));
                 }

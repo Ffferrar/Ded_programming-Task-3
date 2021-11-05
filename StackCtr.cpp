@@ -5,6 +5,13 @@
 #include <math.h>
 #include "structures.h"
 
+#define CANARY2_ADRESS (sstack->data - CAN_PLACE)
+#define CANARY22_ADRESS (sstack->data + sstack->capacity)
+#define CANARY1_VALUE 0xDED27BEDDED27BED
+#define CANARY12_VALUE 0xBAD19DEDBAD19DED
+#define CANARY2_VALUE 0xBED27DEDBED27DED
+#define CANARY22_VALUE 0xBAD19DEDBAD19DED
+
 void FullofPoison (Stack* sstack, int start, int ennd)
 {
     for (int i = start; i < ennd+1; i++)         //+1 потому что надо давать заполн€ть все €чейки при start==end
@@ -27,20 +34,16 @@ void StackCtr (Stack* sstack)
     sstack->capacity = MAX_SIZE;
     sstack->data = (size_stack*) calloc (MAX_SIZE + 2*CAN_PLACE, sizeof(size_stack));  //почему столько выдел€ем?
     sstack->ssize = 0;
-
-    //ставим канарейки
-
-    sstack->canary2 = (size_canary*) (sstack->data);
     sstack->data += CAN_PLACE;
-    sstack->canary22 = (size_canary*) (sstack->data + sstack->capacity);
+    //ставим канарейки
 
     FullofPoison (sstack, 0, MAX_SIZE);
 
-    sstack->canary1 = 0xDED27BEDDED27BED;   //TODO NOT DONE вынести значение канареек в константу
-    sstack->canary12 = 0xBAD19DEDBAD19DED;
+    sstack->canary1 = CANARY1_VALUE;   //TODO NOT DONE вынести значение канареек в константу
+    sstack->canary12 = CANARY12_VALUE;
 
-    *sstack->canary2 = 0xBED27DEDBED27DED;  //TODO DONE ”величить значение канарейки в 2 раза
-    *sstack->canary22 = 0xBAD19DEDBAD19DED;
+    *CANARY2_ADRESS = CANARY2_VALUE;  //TODO DONE ”величить значение канарейки в 2 раза
+    *CANARY22_ADRESS = CANARY22_VALUE;
     //TODO «јѕќЋЌя“№ Ќќ¬џ≈  јЌј–≈… »
 
     sstack->hash_ = StackHash(sstack);
@@ -54,11 +57,9 @@ void StackCtr (Stack* sstack)
 
 void StackResize(Stack *sstack)
 {
-    size_stack* resize_data = nullptr;
     sstack->capacity += RISE_V_STACK;
 
-
-    resize_data = (size_stack*) calloc (sstack->capacity + 2 * CAN_PLACE, sizeof(size_stack));
+    size_stack* resize_data = (size_stack*) calloc (sstack->capacity + 2 * CAN_PLACE, sizeof(size_stack));
     memmove((size_stack*) resize_data + CAN_PLACE, (size_stack*) sstack->data, sstack->capacity*sizeof(size_stack) );
     sstack->data = resize_data + CAN_PLACE;
 
@@ -66,11 +67,8 @@ void StackResize(Stack *sstack)
 
     FullofPoison (sstack, sstack->ssize, sstack->capacity);
 
-    sstack->canary2 = (size_canary*) (resize_data);     //TODO написать дефайн дл€ canary2, DONE —ƒ≈Ћј“№ Ѕ≈« ћ»Ќ”—ј.
-    sstack->canary22 = (size_canary*) (sstack->data + sstack->capacity);
-
-    *sstack->canary2 = 0xBED27DEDBED27DED;
-    *sstack->canary22 = 0xBAD19DEDBAD19DED;
+    *(size_canary*) (resize_data) = CANARY2_VALUE;
+    *CANARY22_ADRESS = CANARY22_VALUE;
 
     sstack->hash_head = StackHashHead (sstack);
 
@@ -95,11 +93,14 @@ void StackPush(Stack *sstack, size_stack value)
 
 }
 
-int StackPop(Stack *sstack)
+size_stack StackPop(Stack *sstack)
 {
-    if(StackOK(sstack) != 0)
+    size_stack verificator = StackOK(sstack);
+    if(verificator != 0)
     {
         StackDump(sstack);
+        ErrorPrint(verificator);   //хот€ зачем , если в дампе все равно печатаетс€
+        return verificator;
     }
     sstack->ssize--;
     int a = sstack->data[sstack->ssize];
@@ -115,7 +116,7 @@ void StackDtor(Stack* sstack)
 {
     assert(sstack);
     memset(sstack -> data, 0xF0, sstack -> ssize);
-    free (sstack -> canary2); //оставить эту строчку
+    free (CANARY2_ADRESS); //оставить эту строчку
     sstack -> ssize = -1;
     sstack->canary1 = 0;
 }
@@ -158,7 +159,7 @@ void ErrorPrint(int ERROR)
 void StackPrint(Stack *sstack)
 {
     printf("Stack data is printed...\n");
-    for (int i = 0; i < (int) sstack->ssize; i++)
+    for (size_t i = 0; i < sstack->ssize; i++)
     {
         printf("data[%d]: %d\n", i, sstack->data[i]);
     }
@@ -169,7 +170,7 @@ void StackDump (Stack *sstack)
     printf("\nDump was called. Please, check your actions:\n");
     printf("Current stack:\n\tStack size %d\n\tStack capacity %d\n\n", sstack->ssize, sstack->capacity);
 
-    if (sstack->data != nullptr && sstack->canary1 == 0xDED27BEDDED27BED && *sstack->canary2 == 0xBED27DEDBED27DED)
+    if (sstack->data != nullptr && sstack->canary1 == CANARY1_VALUE && sstack->canary12 == CANARY12_VALUE && *CANARY2_ADRESS == CANARY2_VALUE && *CANARY22_ADRESS == CANARY22_VALUE)
     {
         StackPrint(sstack);             //TODO DONE вызывать только в том случае, если канарейки целы и указатель на data не равен нулю
     }
@@ -178,7 +179,7 @@ void StackDump (Stack *sstack)
 }
 
 //¬ерификатор стэка
-int StackOK (Stack *sstack)
+size_stack StackOK (Stack *sstack)
 {
     if (sstack == 0)
     {
@@ -196,17 +197,17 @@ int StackOK (Stack *sstack)
         return NULL_DATA_POINTER;
     }
 
-    if (sstack->canary2 == 0)
+    if (CANARY2_ADRESS == 0 || CANARY22_ADRESS == 0)
     {
         return NULL_CANARI_POINTER;
     }
 
-    if (sstack->canary1 != 0xDED27BEDDED27BED || sstack->canary12 != 0xBAD19DEDBAD19DED)
+    if (sstack->canary1 != CANARY1_VALUE || sstack->canary12 != CANARY12_VALUE)
     {
         return CANARY1_DAMAGE;
     }
 
-    if (*sstack->canary2 != 0xBED27DEDBED27DED || *sstack->canary22 != 0xBAD19DEDBAD19DED)
+    if (*CANARY2_ADRESS != CANARY2_VALUE || *CANARY22_ADRESS != CANARY22_VALUE)
     {
         return CANARY2_DAMAGE;
     }

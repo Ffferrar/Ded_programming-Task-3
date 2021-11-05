@@ -46,7 +46,8 @@ enum ERRORS_NAMES
     NULL_CANARI_POINTER = 4,
     CANARY1_DAMAGE = 5,
     CANARY2_DAMAGE = 6,
-    HASH_DAMAGE = 7
+    HASH_DAMAGE = 7,
+    HASH_HEAD_DAMAGE = 8
 };
 
 int StackOK (Stack *sstack);
@@ -56,7 +57,9 @@ void StackPrint(Stack *sstack);
 
 void FullofPoison (Stack* sstack, int start, int ennd);
 
-long long int StackHash (Stack *sstack);
+size_canary StackHash (Stack *sstack);
+size_canary StackHashHead (Stack *sstack);
+
 
 
 //для V1 of CPU
