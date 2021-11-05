@@ -4,38 +4,67 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>05-11-2021 at 15:37.52</u><br />
-Build ended on: <u>05-11-2021 at 15:37.53</u><p />
+Build started on: <u>05-11-2021 at 16:42.48</u><br />
+Build ended on: <u>05-11-2021 at 16:42.49</u><p />
 <b>-------------- Build: Debug in Stack (compiler: Use it for projects       = MinGW GCC + Strict)---------------</b><br />
 g++.exe  -c "C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp" -o obj\Debug\StackCtr.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp: In function 'void StackCtr(Stack*)':<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:45:21: warning: overflow in implicit constant conversion [-Woverflow]</font><br />
+     *CANARY2_ADRESS = CANARY2_VALUE;  //TODO DONE Увеличить значение канарейки в 2 раза<br />
+                     ^<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:46:22: warning: overflow in implicit constant conversion [-Woverflow]</font><br />
+     *CANARY22_ADRESS = CANARY22_VALUE;<br />
+                      ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp: In function 'void StackResize(Stack*)':<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:71:22: warning: overflow in implicit constant conversion [-Woverflow]</font><br />
+     *CANARY22_ADRESS = CANARY22_VALUE;<br />
+                      ^<br />
 C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp: In function 'void StackDump(Stack*)':<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:180:55: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
-     if (sstack-&gt;data != nullptr &amp;&amp; sstack-&gt;canary1 == 0xDED27BEDDED27BED &amp;&amp; *sstack-&gt;canary2 == 0xBED27DEDBED27DED)<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:10:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+ #define CANARY1_VALUE 0xDED27BEDDED27BED<br />
+                       ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:173:55: note: in expansion of macro 'CANARY1_VALUE'<br />
+     if (sstack-&gt;data != nullptr &amp;&amp; sstack-&gt;canary1 == CANARY1_VALUE &amp;&amp; sstack-&gt;canary12 == CANARY12_VALUE &amp;&amp; *CANARY2_ADRESS == CANARY2_VALUE &amp;&amp; *CANARY22_ADRESS == CANARY22_VALUE)<br />
                                                        ^<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:180:97: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
-     if (sstack-&gt;data != nullptr &amp;&amp; sstack-&gt;canary1 == 0xDED27BEDDED27BED &amp;&amp; *sstack-&gt;canary2 == 0xBED27DEDBED27DED)<br />
-                                                                                                 ^<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:11:24: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+ #define CANARY12_VALUE 0xBAD19DEDBAD19DED<br />
+                        ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:173:92: note: in expansion of macro 'CANARY12_VALUE'<br />
+     if (sstack-&gt;data != nullptr &amp;&amp; sstack-&gt;canary1 == CANARY1_VALUE &amp;&amp; sstack-&gt;canary12 == CANARY12_VALUE &amp;&amp; *CANARY2_ADRESS == CANARY2_VALUE &amp;&amp; *CANARY22_ADRESS == CANARY22_VALUE)<br />
+                                                                                            ^<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:12:23: warning: comparison is always false due to limited range of data type [-Wtype-limits]</font><br />
+ #define CANARY2_VALUE 0xBED27DEDBED27DED<br />
+                       ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:173:129: note: in expansion of macro 'CANARY2_VALUE'<br />
+     if (sstack-&gt;data != nullptr &amp;&amp; sstack-&gt;canary1 == CANARY1_VALUE &amp;&amp; sstack-&gt;canary12 == CANARY12_VALUE &amp;&amp; *CANARY2_ADRESS == CANARY2_VALUE &amp;&amp; *CANARY22_ADRESS == CANARY22_VALUE)<br />
+                                                                                                                                 ^<br />
 C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp: In function 'size_stack StackOK(Stack*)':<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:212:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
-     if (sstack-&gt;canary1 != 0xDED27BEDDED27BED || sstack-&gt;canary12 != 0xBAD19DEDBAD19DED)<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:10:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+ #define CANARY1_VALUE 0xDED27BEDDED27BED<br />
+                       ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:205:28: note: in expansion of macro 'CANARY1_VALUE'<br />
+     if (sstack-&gt;canary1 != CANARY1_VALUE || sstack-&gt;canary12 != CANARY12_VALUE)<br />
                             ^<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:212:70: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
-     if (sstack-&gt;canary1 != 0xDED27BEDDED27BED || sstack-&gt;canary12 != 0xBAD19DEDBAD19DED)<br />
-                                                                      ^<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:217:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
-     if (*sstack-&gt;canary2 != 0xBED27DEDBED27DED || *sstack-&gt;canary22 != 0xBAD19DEDBAD19DED)<br />
-                             ^<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:217:72: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
-     if (*sstack-&gt;canary2 != 0xBED27DEDBED27DED || *sstack-&gt;canary22 != 0xBAD19DEDBAD19DED)<br />
-                                                                        ^<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:11:24: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+ #define CANARY12_VALUE 0xBAD19DEDBAD19DED<br />
+                        ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:205:65: note: in expansion of macro 'CANARY12_VALUE'<br />
+     if (sstack-&gt;canary1 != CANARY1_VALUE || sstack-&gt;canary12 != CANARY12_VALUE)<br />
+                                                                 ^<br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:12:23: warning: comparison is always true due to limited range of data type [-Wtype-limits]</font><br />
+ #define CANARY2_VALUE 0xBED27DEDBED27DED<br />
+                       ^<br />
+C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:210:28: note: in expansion of macro 'CANARY2_VALUE'<br />
+     if (*CANARY2_ADRESS != CANARY2_VALUE || *CANARY22_ADRESS != CANARY22_VALUE)<br />
+                            ^<br />
 C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp: In function 'size_canary StackHash(Stack*)':<br />
-<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:238:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+<font color="#0000ff">C:\Users\Trying Python\Desktop\Ded Proffesional programming\Stack\StackCtr.cpp:231:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
      for (int i = 0; i &lt; sstack-&gt;ssize; i++)<br />
                                  ^<br />
 g++.exe  -o bin\Debug\Stack.exe obj\Debug\main.o obj\Debug\StackCtr.o obj\Debug\V1_CPU.o<br />
-Output size is 301,01 KB<br />
-<font color="#0000ff">Process terminated with status 0 (0 minutes, 1 seconds)</font><br />
-<font color="#0000ff">0 errors, 7 warnings (0 minutes, 1 seconds)</font><br />
+Output size is 300,51 KB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minutes, 0 seconds)</font><br />
+<font color="#0000ff">0 errors, 10 warnings (0 minutes, 0 seconds)</font><br />
 </tt>
 </body>
 </html>
